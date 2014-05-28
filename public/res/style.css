@@ -17,7 +17,7 @@ body {
 #loginform input[type=button] { padding: 5px 0px; width: 205px; background: #6BDFDE; border: 0; }
 
 
-#filelist { margin: 0; padding: 0; list-style-type: none; }
+#filelist { margin: 0 10px; padding: 0; list-style-type: none; }
 
 @media screen and (max-width: 599px) {
   #filelist li { padding: 7px; background: #eef; }

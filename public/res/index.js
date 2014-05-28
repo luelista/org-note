@@ -66,7 +66,7 @@ function showFileOrg() {
           try {
             nodes = parseBigString(cont);
           } catch(ex) {
-            $("#content").html("<div style='background:#faa;padding:10px;'>"+ex.+"</div>");
+            $("#content").html("<div style='background:#faa;padding:10px;'>"+ex+"</div>");
           }
               oq = new OrgQuery(nodes)
               render(oq, document.getElementById("content"))
