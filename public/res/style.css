@@ -1,0 +1,33 @@
+
+body {
+  font-size: 10pt;
+  font-family: FiraSans, "Helvetica Neue", sans-serif;
+  margin: 0; padding: 0;
+}
+
+#toolbar {
+  display: -webkit-box; -webkit-flex-direction: row; width: 100%; margin: 5px;
+}
+#toolbar a { -webkit-box-flex: 1; display: block; padding: 5px; background: #ddf; text-align: center; margin: 5px; }
+
+#loginform {
+  width: 210px; margin: 100px auto;
+}
+#loginform input { width: 200px; display: block; }
+#loginform input[type=button] { padding: 5px 0px; width: 205px; background: #6BDFDE; border: 0; }
+
+
+#filelist { margin: 0; padding: 0; list-style-type: none; }
+
+@media screen and (max-width: 599px) {
+  #filelist li { padding: 7px; background: #eef; }
+  #filelist li:nth-child(even) { background: #efe; }
+}
+
+@media screen and (min-width: 600px) {
+  ul#filelist li { width: 180px; height: 180px; float: left; background: #393; color: white; margin: 0 10px 10px 0; padding: 10px; }
+}
+
+#plaintext {
+  white-space: pre-wrap; font: 10pt FiraMono, monospace;
+}

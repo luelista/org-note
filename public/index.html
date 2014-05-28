@@ -1,0 +1,39 @@
+<!doctype html>
+<html xxxmanifest="orgnote.appcache">
+  <head>
+    <title>org-note</title>
+    <script src="res/jquery-2.1.1.min.js"></script>
+    <script src="res/org-mode/underscore-min.js"></script>
+    <script src="res/org-mode/helpers.js"></script>
+    <script src="res/org-mode/org-mode-parser.js"></script>
+    <script src="res/org-mode/plugin-tohtml.js"></script>
+    <script src="res/index.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="res/style.css">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="apple-touch-icon" href="res/icon-128.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="res/icon-76.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="res/icon-120.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="res/icon-152.png">
+    
+  </head>
+  <body>
+    <div id="toolbar">
+      <a href='#' id='download-files'>update</a>
+      <a href='#' id='goto-file-list'>file list</a>
+      <a href='#' id='viewmode-text'>text view</a>
+      <a href='#' id='viewmode-org'>org-mode view</a>
+      <a href='#' id=''>search all files</a>
+      <a href='#' id='do-logout'>log out</a>
+    </div>
+    <div id="content">
+      
+      <div id="loginform">
+        <input type="text" id="username" placeholder="username">
+        <input type="password" id="password" placeholder="">
+        <input type="button" id="ok" value="ok">
+      </div>
+      
+    </div>
+  </body>
+</html>
