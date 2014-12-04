@@ -2,19 +2,22 @@
 
 var currentFile = "";
 var loggedIn = false;
+var authToken = "";
 
 $.event.special.tap.emitTapOnTaphold = false;
 
 
 function apiCall(method, callback, resultType) {
-  return $.get("/api/v1/" + method, callback, resultType);
+  // return $.get("/api/v1/" + method, callback, resultType);
+  return $.get("backend.php?method=" + method + "&authorization=" + authToken,
+               callback, resultType);
 }
 
 function onUrlPath(path) {
   console.log("onUrlPath: ", path);
   if (!loggedIn) return;
   var m;
-  if (null != (m = path.match(/^\/(.*\.org)$/))) {
+  if (null != (m = path.match(/\?(.*\.org)$/))) {
     $("body").pagecontainer("change", "#contentpage", {allowSamePageTransition:true });
     $("#contenttitle").text(m[1]);
     currentFile = m[1];
@@ -29,6 +32,7 @@ function onAuth(token, login) {
   $.ajaxSetup({
       headers: { 'Authorization': 'Bearer '+token }
   });
+  authToken = token;
   $("#logininvalid").hide();
   apiCall("check", function(res) {
     if (res == "ok") {
@@ -113,7 +117,7 @@ function onNavigate(file, line) {
   $("body").pagecontainer("change", "#contentpage", {allowSamePageTransition:true });
   $("#contenttitle").text(file);
   showFileOrg();
-  history.pushState({}, currentFile, '/' + currentFile);
+  history.pushState({}, currentFile, '?' + currentFile);
   if (line) {
     line = parseInt(line, 10);
     var el;
@@ -180,7 +184,7 @@ function simpleOrgParser(org_content) {
   var lines = org_content.split(/\n/);
   var m, headline = /^([*]+)/;
   var out = [];
-  out.push({ indent: 1, title: "▸ ", content: [] });
+  out.push({ indent: 1, title: "-> ", content: [] });
   for(var i = 0; i < lines.length; i++) {
     var line = lines[i];
     if (null != (m = headline.exec(line))) {
@@ -288,7 +292,7 @@ function searchUpdateActive()  {
 $( function() {
   $("#download-files").click(downloadAllFiles);
   $("#gohome").click(function() {
-    history.pushState({}, '', '/');
+    history.pushState({}, '', '?list');
   });
   $("#viewmode-text").click(showFileText);
   $("#viewmode-org").click(showFileOrg);
