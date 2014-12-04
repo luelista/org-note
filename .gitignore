@@ -1,4 +1,6 @@
 config.js
+public/config.inc.php
+
 node_modules/
 *~
 \#*#
