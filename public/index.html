@@ -1,39 +1,119 @@
 <!doctype html>
-<html xxxmanifest="orgnote.appcache">
+<html manifest="orgnote.appcache">
   <head>
     <title>org-note</title>
-    <script src="res/jquery-2.1.1.min.js"></script>
-    <script src="res/org-mode/underscore-min.js"></script>
-    <script src="res/org-mode/helpers.js"></script>
-    <script src="res/org-mode/org-mode-parser.js"></script>
-    <script src="res/org-mode/plugin-tohtml.js"></script>
-    <script src="res/index.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+
     <link rel="stylesheet" href="res/style.css">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <link rel="apple-touch-icon" href="res/icon-128.png">
     <link rel="apple-touch-icon" sizes="76x76" href="res/icon-76.png">
     <link rel="apple-touch-icon" sizes="120x120" href="res/icon-120.png">
     <link rel="apple-touch-icon" sizes="152x152" href="res/icon-152.png">
+
+    <!-- jQueryMobileCSS - original without styling -->
+    <link rel="stylesheet" href="//code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css" />
+
+    <!-- nativeDroid core CSS -->
+    <link rel="stylesheet" href="res/css/jquerymobile.nativedroid.css" />
+
+    <!-- nativeDroid: Light/Dark -->
+    <link rel="stylesheet" href="res/css/jquerymobile.nativedroid.dark.css"  id='jQMnDTheme' />
+
+    <!-- nativeDroid: Color Schemes -->
+    <link rel="stylesheet" href="res/css/jquerymobile.nativedroid.color.green.css" id='jQMnDColor' />
+
+
+    <!-- FontAwesome - http://fortawesome.github.io/Font-Awesome/ -->
+        <link rel="stylesheet" href="css/font-awesome.min.css" />
+
+
+    <script src="res/jquery-2.1.1.min.js"></script>
+    <script src="//code.jquery.com/mobile/1.4.4/jquery.mobile-1.4.4.min.js"></script>
+    <script src="res/org-mode/underscore-min.js"></script>
+    <script src="res/org-mode/helpers.js"></script>
+    <script src="res/org-mode/org-mode-parser.js"></script>
+    <script src="res/org-mode/plugin-tohtml.js"></script>
+    <script src="res/index.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
   </head>
   <body>
-    <div id="toolbar">
-      <a href='#' id='download-files'>update</a>
-      <a href='#' id='goto-file-list'>file list</a>
-      <a href='#' id='viewmode-text'>text view</a>
-      <a href='#' id='viewmode-org'>org-mode view</a>
-      <a href='#' id=''>search all files</a>
-      <a href='#' id='do-logout'>log out</a>
-    </div>
-    <div id="content">
-      
-      <div id="loginform">
-        <input type="text" id="username" placeholder="username">
-        <input type="password" id="password" placeholder="">
-        <input type="button" id="ok" value="ok">
+
+
+    <div data-role="panel" id="searchpanel" data-position="right" data-display="reveal" data-theme='b'>
+      <div class="inset" data-role="fieldcontain">
+				<h3>Quick Search</h3>
+      	
+	      <input type="text" placeholder="Enter search keyword..." data-role="field" id="searchbox">
+			</div>
+      <ul id="searchresults" data-role="listview" data-theme='b'></ul>
+      <!-- panel content goes here -->
+    </div><!-- /panel -->
+
+
+    <div data-role='page' id='loginpage' data-theme='b'>
+      <div data-role='header' data-theme='b'> <a><i class="fa fa-edit"></i></a>   <h1>  org-note </h1></div>
+      <div data-role='content' data-theme='b'>
+
+  			<ul data-role="listview" data-inset="true">
+      		<li data-role="fieldcontain" id="logininvalid" style="display:none">
+						<div class="message error">
+							<i class="fa fa-exclamation"></i>
+							<p>Invalid login data.</p>
+						</div>
+					</li>
+      		<li data-role="fieldcontain">
+         	 <fieldset data-role="controlgroup">
+     				<legend>Log in</legend>
+        		<input type="text" id="username" placeholder="username" autocapitalize="off">
+        		<input type="password" id="password" placeholder="">
+
+        		<a href='#' data-iconpos='left' data-role='button' data-inline='true' id="ok"><i class="fa fa-check"></i> Okay</a>
+         	 </fieldset>
+    		 </li>
+			 </ul>
       </div>
-      
     </div>
+
+    <div data-role="page" id="mainpage" data-theme='b'>
+
+      <div id="toolbar" data-role="header" data-theme='b' data-position='fixed' data-tap-toggle="false">
+        <a href="#mainmenu" id="gohome"><i class="fa fa-bars"></i></a>
+        <!--      <a href='javascript://' id='goto-file-list'>⇧ file list</a>
+                  <input type="text" id="searchbox" placeholder="search ...">
+                  <a href='javascript://' id='menu-btn'>⌘</a>-->
+        <h1>org-note</h1>
+        <a href="#searchpanel" class='ui-btn-right'><i class="fa fa-search"></i></a>
+      </div>
+			
+      <div id="mainmenu" data-role="panel" data-theme="b" data-position="left" data-display="push">
+          <ul data-role="listview">
+						<li>org-note menu</li>
+            <li data-icon='false'><a href='#' id='download-files'>Update files</a></li>
+            <li data-icon='false'><a href='#' id='do-logout'>Log out</a></li>
+          </ul>
+      </div>
+
+      <div data-role="content">
+        <ul id="filelist" data-role="listview" data-theme="b"></ul>
+      </div>
+    </div>
+
+
+
+    <div data-role="page" id="contentpage" data-theme='b'>
+
+      <div id="toolbar" data-role="header" data-theme='b' data-position='fixed' data-tap-toggle="false">
+        <a href="#mainpage" data-theme='b'><i class="fa fa-home"></i></a>
+        <h1 id="contenttitle">org-note</h1>  
+        <a href="#searchpanel" data-theme='b' class='ui-btn-right'><i class="fa fa-search"></i></a>
+      </div>
+
+      <div id="content" data-role="content">
+Text
+        
+      </div>
+    </div>
+
   </body>
 </html>

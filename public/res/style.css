@@ -2,13 +2,21 @@
 body {
   font-size: 10pt;
   font-family: FiraSans, "Helvetica Neue", sans-serif;
-  margin: 0; padding: 0;
+  margin: 0; padding: 0 10px 40px 0;
 }
 
-#toolbar {
-  display: -webkit-box; -webkit-flex-direction: row; width: 100%; margin: 5px;
+/*#toolbar {
+  display: -webkit-box; display: -moz-box; -webkit-flex-direction: row; width: 100%; -moz-flex-direction: row;
+  background: #ddf; background: linear-gradient(to bottom, #dfdfff 0%, #babada 100%);
 }
-#toolbar a { -webkit-box-flex: 1; display: block; padding: 5px; background: #ddf; text-align: center; margin: 5px; }
+#toolbar #searchbox { -webkit-box-flex: 1; -moz-box-flex: 1; display: block; }
+#toolbar a { text-decoration: none; -webkit-box-flex: 1; -moz-box-flex: 1; display: block; padding: 5px 1px; background-color: rgba(255,255,255,0.2); text-align: center; margin: 1px; }
+#toolbar #menu-btn { font-size: 130%; -webkit-box-flex: 0; -moz-box-flex: 0; padding: 5px 10px; }
+#toolbar a:hover { background-color: rgba(255,255,255,0.4); color: black; }
+#dropdown { position: absolute; top: 30px; right: 5px; border: 1px solid black; background: white; }
+#dropdown a { display: block; padding: 3px 20px 3px 10px; color: black; text-decoration: none; }
+#dropdown a:hover { background: linear-gradient(to bottom, #5585F0 0%, #2460E9 100%); color: white; }
+*/
 
 #loginform {
   width: 210px; margin: 100px auto;
@@ -16,18 +24,56 @@ body {
 #loginform input { width: 200px; display: block; }
 #loginform input[type=button] { padding: 5px 0px; width: 205px; background: #6BDFDE; border: 0; }
 
+ul#text , ul#text ul { list-style-type: none; margin: 0; padding: 0 0 0 10px; }
+ul#text li { margin: 2px 0; }
+ul#text .textcontent { 
+  background: #fafafa; color: #444; padding: 3px 5px; overflow: hidden; white-space: pre-wrap; 
+  max-height: 35px; box-shadow: inset -5px 0 5px #fafafa; font-family: monospace; font-size: 9pt;
+}
+ul#text .textcontent.expand { max-height: inherit; }
+ul#text .head { padding: 3px 5px; }
+ul#text .head:hover, ul#text .textcontent:hover { outline: 2px solid #f88; }
+ul#text li.expand>.head:hover, ul#text .textcontent.expand:hover { outline: 2px solid #8f8; }
+ul#text li.node ul { display: none; }
+ul#text li.node.expand>ul { display: block; }
+ul#text li.bigger { font-size: 125%; }
 
+ul#text li>.head { background: #666; background: linear-gradient(to bottom, #606060 0%, #6a6a6a 100%); color: #eee; font-weight: bold; }
+ul#text li>ul>li>.head{ background: #999; background: linear-gradient(to bottom, #909090 0%, #a2a2a2 100%); color: #eee; }
+ul#text li>ul>li>ul>li>.head { background: #d7d7d7; background: linear-gradient(to bottom, #d0d0d0 0%, #dfdfdf 100%); color: #222; }
+/*
+#searchresults { list-style-type: none; margin: 5px; padding: 0; }
+#searchresults li { font-family: "Menlo", monospace; margin: 2px 0; padding: 2px; background: #eee; }
+#searchresults li.selected { color: white; background: linear-gradient(to bottom, #5585F0 0%, #2460E9 100%); }
+#searchresults li span { color: #777; float: right; font-size: 80%; }
+#searchresults li em { color: #333; background: #ff6; font-style: normal; }
+*/
+
+#filelist li {  }
+#filelist li .small-icon { width: 22px!important; height: 22px!important; }
+
+.ui-header {overflow:hidden;}
+
+/*
 #filelist { margin: 0 10px; padding: 0; list-style-type: none; }
 
 @media screen and (max-width: 599px) {
-  #filelist li { padding: 7px; background: #eef; }
-  #filelist li:nth-child(even) { background: #efe; }
+  #filelist li { cursor: pointer; padding: 7px; margin: 2px 0; height: 10px; overflow: hidden; background: #eef;  background: linear-gradient(to bottom, #efefef 0%, #d6d6d6 100%) !important; }
+  #filelist li .small-icon { max-height: 32px; max-width: 32px; float:left; margin-top: -5px; vertical-align: top; }
+  #filelist li:hover { background: #ddf;  background: linear-gradient(to bottom, #e0e0e0 0%, #c7c7c7 100%); }
+  
+  #dropdown a { padding: 8px 20px; }
 }
 
 @media screen and (min-width: 600px) {
-  ul#filelist li { width: 180px; height: 180px; float: left; background: #393; color: white; margin: 0 10px 10px 0; padding: 10px; }
+  ul#filelist li {
+    width: 180px; height: 180px; float: left; background: #393; color: white;
+    margin: 0 10px 10px 0; padding: 10px; font-size: 12pt; background-repeat: no-repeat; background-position: center;
+  }
+  ul#filelist li:hover { background-color: #4a4; font-weight: bold; }
+  #filelist li .small-icon { display: none; }
 }
-
+*/
 #plaintext {
   white-space: pre-wrap; font: 10pt FiraMono, monospace;
 }

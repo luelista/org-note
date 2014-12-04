@@ -31,7 +31,6 @@ app.get('/api/v1/files', auth, function(req, res) {
   });
 });
 app.get('/api/v1/check', auth, function(req, res) {
-  
       res.send(200, 'ok');
 });
 app.get('/api/v1/all_files', auth, function(req, res) {
@@ -39,9 +38,9 @@ app.get('/api/v1/all_files', auth, function(req, res) {
     if (err) {
       res.send(500, err);
     } else {
-      var filter = /\.org$/;
+      var filter = /\.org$/, filter2 = /^[.#]/;
       
-      async.map(files.filter(function(f) { return filter.test(f) }), function(item, callback) {
+      async.map(files.filter(function(f) { return filter.test(f) && !filter2.test(f) }), function(item, callback) {
         fs.readFile(config.note_path + '/' + item, function(err, cont) {
           callback(err, [item, cont]);
         });
@@ -70,6 +69,16 @@ app.get('/api/v1/file/*', auth, function(req, res) {
       res.send(content);
     }
   });
+});
+
+app.use(function(req, res, next) {
+  if (req.url.match(/^\/api\//)) {
+    next();
+  } else if (req.url.match(/\.org$/)) {
+    res.sendfile("public/index.html");
+  } else {
+    next();
+  }
 });
 
 var server = app.listen(3030, function() {
